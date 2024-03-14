@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+*, *::before, *::after {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+:root {
+  font-size: 1rem;
+  --bg-img-desktop: url(./assets/bg-desktop-light.jpg);
+}
+
+body {
+  background-image: var(--bg-img-desktop);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  color: hsl(0, 0%, 26%);
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-size: auto 100%;
+  }
+}
