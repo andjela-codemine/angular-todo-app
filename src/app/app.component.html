@@ -1,63 +1,6 @@
 <div class="container">
   <div class="todo-wrapper">
-    <h2>TODO</h2>
-    <div class="input-wrapper">
-      <input id="taskInput"
-             type="text"
-             placeholder="Create a new todo..."
-             [(ngModel)]="task" />
-      <button id="addTaskButton"
-              (click)="add()">+
-      </button>
-    </div>
-    <div [class.task-list]="list.length > 0">
-      <div
-        *ngFor="let item of filteredList; let i=index">
-        <div class="task-item">
-          <input (change)="changeStatus(item.id, item.isComplete)"
-                 type="checkbox"
-                 [checked]="item.isComplete"
-                 id="{{i}}">
-          <label for="{{i}}"
-                 *ngIf="item.isComplete">
-            <s>{{ item.description }}</s>
-          </label>
-          <label for="{{i}}"
-                 *ngIf="!item.isComplete">
-            {{ item.description }}
-          </label>
-          <button id="deleteTaskButton"
-                  (click)="delete(item.id)">
-            <img ngSrc="./assets/icon-cross.svg"
-                 alt="Cross image"
-                 class="cross-icon"
-                 height="18"
-                 width="18">
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="action-buttons"
-         *ngIf="list.length > 0">
-      <div>
-        <button class="action-btn"
-                (click)="filterList()">All
-        </button>
-        <button class="action-btn"
-                (click)="getActive()">Active
-        </button>
-        <button class="action-btn"
-                (click)="getCompleted()">Completed
-        </button>
-      </div>
-      <div>
-        <button class="action-btn"
-                (click)="clearCompleted()">Clear completed
-        </button>
-        <button class="action-btn"
-                (click)="deleteAll()">Delete All
-        </button>
-      </div>
-    </div>
+    <app-add-todo></app-add-todo>
+    <app-display-todo></app-display-todo>
   </div>
 </div>

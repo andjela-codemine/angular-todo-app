@@ -1,0 +1,49 @@
+
+.task-list {
+  background-color: hsl(0, 0%, 98%);
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+
+button {
+  border: none;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button:hover {
+  color: hsl(235, 19%, 35%);
+}
+
+#deleteTaskButton {
+  border: none;
+}
+
+.action-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.action-btn:focus {
+  background-color: hsla(231, 7%, 79%, 0.77);
+}
+
+@media screen and (max-width: 768px) {
+  .action-btn {
+    font-size: 0.75rem;
+  }
+}

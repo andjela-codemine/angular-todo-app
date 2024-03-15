@@ -1,0 +1,46 @@
+<div [class.task-list]="todos.length > 0">
+  @for (todo of todos | filterTodos: currentFilter; track todo; let i = $index) {
+    <div class="task-item">
+      <input (change)="changeStatus(todo.id, todo.isComplete)"
+             type="checkbox"
+             [checked]="todo.isComplete"
+             [id]="i">
+      @if (todo.isComplete) {
+        <s>{{ todo.description }}</s>
+      } @else {
+        {{ todo.description }}
+      }
+      <button id="deleteTaskButton"
+              (click)="deleteTodo(todo.id)">
+        <img ngSrc="./assets/icon-cross.svg"
+             alt="Cross image"
+             class="cross-icon"
+             height="18"
+             width="18">
+      </button>
+    </div>
+  }
+</div>
+@if (todos.length > 0) {
+  <div class="action-buttons">
+    <div>
+      <button class="action-btn"
+              (click)="currentFilter= 'all'">All
+      </button>
+      <button class="action-btn"
+              (click)="currentFilter='active'">Active
+      </button>
+      <button class="action-btn"
+              (click)="currentFilter='completed'">Completed
+      </button>
+    </div>
+    <div>
+      <button class="action-btn"
+              (click)="deleteCompletedTodos()">Clear completed
+      </button>
+      <button class="action-btn"
+              (click)="deleteAllTodos()">Delete All
+      </button>
+    </div>
+  </div>
+}
