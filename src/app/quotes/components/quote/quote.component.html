@@ -1,0 +1,18 @@
+@if (quote) {
+  <div class="quote-template">
+    <div class="overlap-group">
+      <img class="quote-up"
+           ngSrc="../../../../assets/up_quote.svg"
+           alt="Quote Image"
+           height="62"
+           width="72" />
+      <img class="quote-down"
+           ngSrc="../../../../assets/down_quote.svg"
+           alt="Quote Image"
+           height="62"
+           width="72" />
+      <div class="quote">{{ quote.quote }}</div>
+      <div class="author-name">- {{ quote.author }}</div>
+    </div>
+  </div>
+}

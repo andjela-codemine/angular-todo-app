@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Task } from './interfaces/task.interface';
-import { DataTodosService } from './services/dataTodos.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

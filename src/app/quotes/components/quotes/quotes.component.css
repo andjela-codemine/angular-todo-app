@@ -1,0 +1,31 @@
+.container {
+  padding: 4rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.random-quote-btn {
+  padding: 1rem;
+  background-color: rgba(107, 85, 168, 0.68);
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.quotes-wrapper {
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .quotes-wrapper {
+    width: 100%;
+  }
+}

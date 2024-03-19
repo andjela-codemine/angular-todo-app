@@ -1,0 +1,47 @@
+.quote-template {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.51);
+  padding: 2rem;
+}
+
+.overlap-group {
+  padding: 4rem;
+  background-color: #ecf0f4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.quote-template .quote-down {
+  position: absolute;
+  top: -30px;
+  left: -20px;
+}
+
+.quote-template .quote-up {
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+}
+
+.quote-template .quote {
+  font-weight: bolder;
+  color: #131415;
+  font-size: 2rem;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+
+.author-name {
+  font-variant: all-petite-caps;
+}
+
+@media (max-width: 768px) {
+  .quote-template {
+    width: 100%;
+  }
+}
