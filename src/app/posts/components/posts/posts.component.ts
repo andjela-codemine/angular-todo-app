@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Post } from '../../interfaces/post';
 import { PostService } from '../../services/post.service';
 
@@ -44,8 +44,13 @@ export class PostsComponent implements OnInit {
     }
   }
 
+  scrollDistance = 2;
+  scrollUpDistance = 1;
+
   loadMorePosts(): void {
-    this.showPosts += 5;
-    this.getPosts();
+    if (this.totalNumberOfPosts > this.posts.length) {
+      this.showPosts += 5;
+      this.getPosts();
+    }
   }
 }

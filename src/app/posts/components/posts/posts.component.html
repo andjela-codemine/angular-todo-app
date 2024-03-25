@@ -1,4 +1,8 @@
-<div class="posts container d-flex flex-column p-3 bg-transparent rounded-2 mt-2 justify-content-center align-items-center">
+<div class="posts container d-flex flex-column p-3 bg-transparent rounded-2 mt-2 justify-content-center align-items-center"
+     infinite-scroll
+     [infiniteScrollDistance]="scrollDistance"
+     [infiniteScrollUpDistance]="scrollUpDistance"
+     (scrolled)="loadMorePosts()">
   <div class="d-flex justify-content-center gap-5 flex-wrap align-items-center">
     <div ngbDropdown
          class="dropdown">
@@ -41,8 +45,8 @@
                 (selectedTagChange)="selectItem($event)"></app-post>
     }
   </div>
-  <button class="load-more-posts btn mt-4"
-          [disabled]="totalNumberOfPosts <= posts.length"
-          (click)="loadMorePosts()">Load more posts
-  </button>
+  <!--  <button class="load-more-posts btn mt-4"-->
+  <!--          [disabled]="totalNumberOfPosts <= posts.length"-->
+  <!--          (click)="loadMorePosts()">Load more posts-->
+  <!--  </button>-->
 </div>
