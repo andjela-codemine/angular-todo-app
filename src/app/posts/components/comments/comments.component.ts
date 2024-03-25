@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, inject, Input, TemplateRef } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommentsService } from '../../services/comments.service';
@@ -12,7 +12,7 @@ import { Comments } from '../../interfaces/comments';
   ],
   templateUrl: './comments.component.html',
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent {
   private modalService = inject(NgbModal);
   @Input() postId?: number;
   comments?: Comments[] = [];
@@ -20,11 +20,8 @@ export class CommentsComponent implements OnInit {
   constructor(private commentsService: CommentsService) {}
 
   openScrollableContent(longContent: TemplateRef<any>) {
-    this.modalService.open(longContent, { scrollable: true, centered: true });
-  }
-
-  ngOnInit() {
     this.getComments();
+    this.modalService.open(longContent, { scrollable: true, centered: true });
   }
 
   getComments() {

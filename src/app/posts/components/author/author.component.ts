@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, inject, Input, TemplateRef } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorService } from '../../services/author.service';
@@ -12,16 +12,13 @@ import { Author } from '../../interfaces/author';
   ],
   templateUrl: './author.component.html'
 })
-export class AuthorComponent implements OnInit {
+export class AuthorComponent {
   private modalService = inject(NgbModal);
   @Input() postId?: number;
   author?: Author;
 
   constructor(private authorService: AuthorService) {}
 
-  ngOnInit() {
-    this.getAuthor();
-  }
 
   getAuthor(): void {
     if (this.postId)
@@ -29,6 +26,7 @@ export class AuthorComponent implements OnInit {
   }
 
   openVerticallyCentered(content: TemplateRef<any>) {
+    this.getAuthor();
     this.modalService.open(content, { centered: true });
   }
 }

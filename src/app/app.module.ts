@@ -16,6 +16,7 @@ import { ProductsComponent } from './products/components/products/products.compo
 import { PostsComponent } from './posts/components/posts/posts.component';
 import { PostComponent } from './posts/components/post/post.component';
 import { PostPipe } from './posts/pipes/post.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PostPipe } from './posts/pipes/post.pipe';
     QuoteComponent,
     HttpClientModule,
     NgbModule,
-    PostComponent
+    PostComponent,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
