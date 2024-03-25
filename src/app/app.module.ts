@@ -11,6 +11,11 @@ import { QuotesComponent } from './quotes/components/quotes/quotes.component';
 import { AppRoutingModule } from './app-routing.module';
 import { QuoteComponent } from './quotes/components/quote/quote.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsComponent } from './products/components/products/products.component';
+import { PostsComponent } from './posts/components/posts/posts.component';
+import { PostComponent } from './posts/components/post/post.component';
+import { PostPipe } from './posts/pipes/post.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
     FilterTodosPipe,
     AddTodoComponent,
     DisplayTodoComponent,
-    QuotesComponent
+    QuotesComponent,
+    ProductsComponent,
+    PostsComponent,
+    PostPipe
   ],
   imports: [
     BrowserModule,
@@ -27,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgOptimizedImage,
     AppRoutingModule,
     QuoteComponent,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    PostComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

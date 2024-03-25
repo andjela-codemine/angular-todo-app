@@ -1,0 +1,35 @@
+@if (post) {
+  <div class="container d-flex p-3 justify-content-center">
+    <div class="post">
+      <div class="post-body">
+        <h5 class="post-title fw-bold p-2">{{ post.title }}</h5>
+        <hr />
+        <p class="post-description p-2">{{ post.body }}</p>
+      </div>
+      <div class="d-flex justify-content-between flex-wrap">
+        <div class="d-flex gap-5 p-3 flex-wrap">
+          <div class="post-likes d-flex gap-2"
+               (click)="likeClick()">
+            <img ngSrc="./assets/likeIcon.svg"
+                 alt="Like Icon"
+                 height="24"
+                 width="25"
+                 class="shake">
+            <span> {{ post.reactions + this.likeClicks }}</span>
+          </div>
+          <app-author [postId]="post.id"></app-author>
+          <app-comments [postId]="post.id"></app-comments>
+        </div>
+        @if (post.tags.length > 0) {
+          <div class="post-tags d-flex gap-2 p-3 flex-wrap">
+            @for (tag of post.tags; track tag) {
+              <li class="post-tag"
+                  (click)="updateSelectedTag(tag)">{{ tag }}
+              </li>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

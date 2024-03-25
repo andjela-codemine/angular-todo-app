@@ -1,0 +1,28 @@
+<div class="container p-3">
+  <div class="d-flex gap-5 flex-wrap justify-content-center">
+    @for (product of products; track product) {
+      <div class="product-card">
+        <img class="product-thumbnail"
+             ngSrc="{{product.thumbnail}}"
+             alt="Product Thumbnail"
+             [width]="20"
+             [height]="150">
+        <div class="p-3">
+          <h2 class="product-title fw-bolder">{{ product.title }}</h2>
+          <p class="fw-lighter">{{ product.description }}</p>
+          <p class="fw-bolder fs-4">${{ product.price }}</p>
+          <p class="fw-bolder">Rating: {{ product.rating }}</p>
+          <p class="product-stock">In Stock: {{ product.stock }}</p>
+          <p class="product-brand">Brand: {{ product.brand }}</p>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="d-flex align-items-center justify-content-center mt-lg-5 flex-column">
+    <ngb-pagination [collectionSize]="totalItems"
+                    [(page)]="currentPage"
+                    (pageChange)="pageChanged()"
+                    [boundaryLinks]="true" />
+    <pre>Current page: {{ currentPage }}</pre>
+  </div>
+</div>

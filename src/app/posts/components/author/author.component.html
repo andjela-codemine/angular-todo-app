@@ -1,0 +1,40 @@
+<div class="post-author d-flex gap-2">
+  <img ngSrc="./assets/verifedIcon.svg"
+       alt="Verified Icon"
+       height="24"
+       width="25">
+  <span (click)="openVerticallyCentered(content)"> author</span>
+</div>
+
+<ng-template #content
+             let-modal>
+  @if (author) {
+    <div class="modal-header">
+      <h4 class="modal-title">{{ author.firstName }} {{ author.lastName }}
+        ({{ author.age }}{{ author.gender === 'female' ? 'F' : 'M' }})</h4>
+      <button type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="d-flex gap-3 align-items-center mb-2">
+        <img ngSrc="{{author.image}}"
+             alt="Author image"
+             width="90"
+             height="90">
+        <div class="fw-bolder">{{ '@' }}{{ author.username }}</div>
+      </div>
+      <div>Birth year: {{ author.birthDate.substring(0, 4) }}</div>
+      <div>Contact: <a class="link-underline-opacity-75 link-danger"
+                       href="#">{{ author.email }}</a></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button"
+              class="btn btn-secondary"
+              (click)="modal.close('Close click')">Close
+      </button>
+    </div>
+  }
+</ng-template>
+

@@ -1,0 +1,48 @@
+<div class="posts container d-flex flex-column p-3 bg-transparent rounded-2 mt-2 justify-content-center align-items-center">
+  <div class="d-flex justify-content-center gap-5 flex-wrap align-items-center">
+    <div ngbDropdown
+         class="dropdown">
+      <label for="dropdownMenu2"
+             class="fw-bold text-white">Filter posts by category</label>
+      <button class="btn text-white dropdown-toggle"
+              id="dropdownMenu2"
+              ngbDropdownToggle
+              aria-expanded="false">
+        {{ selectedTag }}
+      </button>
+      <ul class="dropdown-menu"
+          aria-labelledby="dropdownMenu2"
+          ngbDropdownMenu>
+        @for (tag of tags; track tag) {
+          <li>
+            <button class="dropdown-item btn btn-outline-dark"
+                    type="button"
+                    (click)="selectItem(tag)"
+                    value="">{{ tag }}
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="d-flex justify-content-center">
+      <label for="numberOfPostsToShow"
+             class="m-2 text-white">Show posts </label>
+      <input id="numberOfPostsToShow"
+             type="number"
+             class="rounded-2 border-1 w-25 p-1"
+             [(ngModel)]="showPosts"
+             (input)="changeShowPosts()"
+             min="1">
+    </div>
+  </div>
+  <div class="d-flex gap-3 flex-wrap justify-content-center">
+    @for (post of posts | filterPosts: selectedTag; track post) {
+      <app-post [post]="post"
+                (selectedTagChange)="selectItem($event)"></app-post>
+    }
+  </div>
+  <button class="load-more-posts btn mt-4"
+          [disabled]="totalNumberOfPosts <= posts.length"
+          (click)="loadMorePosts()">Load more posts
+  </button>
+</div>

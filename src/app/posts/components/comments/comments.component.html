@@ -1,0 +1,38 @@
+<div class="post-comments d-flex gap-2">
+  <img ngSrc="./assets/commentsIcon.svg"
+       alt="Comments Icon"
+       height="24"
+       width="25">
+  <span (click)="openScrollableContent(longContent)"> comments</span>
+</div>
+<ng-template #longContent
+             let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Comments</h4>
+    <button type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    @if (comments?.length === 0) {
+      <p>No comments yet</p>
+    }
+    @for (comment of comments; track comment; let i = $index) {
+      @if (i > 0) {
+        <hr />
+      }
+      <div class="d-flex gap-2">
+        <div class="fw-bolder">{{ '@' }}{{ comment.user.username }}</div>
+        <div>{{ comment.body }}</div>
+      </div>
+    }
+
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="modal.close('Close click')">Close
+    </button>
+  </div>
+</ng-template>
