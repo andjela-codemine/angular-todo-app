@@ -17,6 +17,9 @@ import { PostsComponent } from './posts/components/posts/posts.component';
 import { PostComponent } from './posts/components/post/post.component';
 import { PostPipe } from './posts/pipes/post.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ProductPipe } from './products/pipes/product.pipe';
+import { ProductComponent } from './products/components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     QuotesComponent,
     ProductsComponent,
     PostsComponent,
-    PostPipe
+    PostPipe,
+    ProductPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     HttpClientModule,
     NgbModule,
     PostComponent,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgSelectModule,
+    ProductComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

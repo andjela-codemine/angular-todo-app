@@ -1,0 +1,35 @@
+@if (product) {
+  <div class="product-card">
+    <img class="product-thumbnail"
+         ngSrc="{{product.thumbnail}}"
+         alt="Product Thumbnail"
+         [width]="300"
+         [height]="150"
+         (click)="openVerticallyCentered(content)">
+    <div class="p-3">
+      <h2 class="product-title fw-bolder">{{ product.title }}</h2>
+      <p class="fw-lighter">{{ product.description }}</p>
+      <p class="fw-bolder fs-4">${{ product.price }}</p>
+      <p class="fw-bolder">Rating: {{ product.rating }}</p>
+      <p class="product-stock">In Stock: {{ product.stock }}</p>
+      <p class="product-brand">Brand: {{ product.brand }}</p>
+    </div>
+  </div>
+  <ng-template #content>
+    <ngb-carousel>
+      @for (image of product.images; track image) {
+        <ng-template ngbSlide>
+          <div class="pics um-img-wrapper">
+            <img ngSrc="{{image}}"
+                 alt="Carousel Image"
+                 [width]="500"
+                 [height]="400" />
+          </div>
+        </ng-template>
+      }
+    </ngb-carousel>
+  </ng-template>
+
+} @else {
+  <div>No products found</div>
+}

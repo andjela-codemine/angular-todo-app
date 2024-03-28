@@ -1,28 +1,47 @@
-<div class="container p-3">
+<div class="container d-flex flex-column p-3 gap-5 align-items-center justify-content-center">
+  <div class="categories d-flex flex-column p-3 flex-wrap">
+    <div class="p-2">
+      <img ngSrc="./assets/searchIcon.svg"
+           alt="Search Icon"
+           height="24"
+           width="24" />
+      <input [(ngModel)]="inputSearch"
+             type="text"
+             placeholder="Search term..."
+             class="border-0 p-2"
+             (input)="searchInputChanged()">
+    </div>
+    <ng-select [(ngModel)]="selectedCategory"
+               placeholder="Select category"
+               (change)="categoriesChanged()">
+      @for (category of categories; track category) {
+        <ng-option [value]="category">{{ category.replace("-", " ") | uppercase }}</ng-option>
+      }
+    </ng-select>
+    @if (selectedCategory) {
+      <ng-select [items]="brands"
+                 bindLabel="name"
+                 bindValue="id"
+                 placeholder="Select brand"
+                 [(ngModel)]="selectedBrand"
+                 [multiple]="true">
+      </ng-select>
+    }
+
+  </div>
   <div class="d-flex gap-5 flex-wrap justify-content-center">
-    @for (product of products; track product) {
-      <div class="product-card">
-        <img class="product-thumbnail"
-             ngSrc="{{product.thumbnail}}"
-             alt="Product Thumbnail"
-             [width]="20"
-             [height]="150">
-        <div class="p-3">
-          <h2 class="product-title fw-bolder">{{ product.title }}</h2>
-          <p class="fw-lighter">{{ product.description }}</p>
-          <p class="fw-bolder fs-4">${{ product.price }}</p>
-          <p class="fw-bolder">Rating: {{ product.rating }}</p>
-          <p class="product-stock">In Stock: {{ product.stock }}</p>
-          <p class="product-brand">Brand: {{ product.brand }}</p>
-        </div>
-      </div>
+    @for (product of products | filterProducts: selectedBrand; track product) {
+      <app-product [product]="product"></app-product>
     }
   </div>
   <div class="d-flex align-items-center justify-content-center mt-lg-5 flex-column">
     <ngb-pagination [collectionSize]="totalItems"
                     [(page)]="currentPage"
+                    [pageSize]="itemsPerPage"
+                    [maxSize]="5"
                     (pageChange)="pageChanged()"
                     [boundaryLinks]="true" />
+    total items: {{ totalItems }}
     <pre>Current page: {{ currentPage }}</pre>
   </div>
 </div>
