@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgOptimizedImage } from '@angular/common';
@@ -20,6 +20,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductPipe } from './products/pipes/product.pipe';
 import { ProductComponent } from './products/components/product/product.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,13 @@ import { ProductComponent } from './products/components/product/product.componen
     PostComponent,
     InfiniteScrollModule,
     NgSelectModule,
-    ProductComponent
+    ProductComponent,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' } }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

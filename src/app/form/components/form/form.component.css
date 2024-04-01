@@ -1,0 +1,29 @@
+.container {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+form {
+  border-radius: 8px;
+}
+
+
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  flex: inherit !important;
+}
+
+@media screen and (max-width: 800px) {
+  form {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .form-group {
+    width: 100% !important;
+    padding: 1rem;
+  }
+}

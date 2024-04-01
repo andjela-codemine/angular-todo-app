@@ -1,0 +1,154 @@
+@if (userForm) {
+  <div class="container d-flex flex-wrap w-100 mt-2 justify-content-center fs-5">
+    <form [formGroup]="userForm"
+          (ngSubmit)="onFormSubmit()"
+          class="form-text d-flex flex-wrap p-5 w-100 justify-content-evenly">
+      <div class="form-group d-flex flex-column gap-4 w-25">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput
+                 type="text"
+                 id="name"
+                 formControlName="name"
+                 required>
+          <mat-error>
+            @if (name?.invalid && (formSubmitted || name?.touched)) {
+              @if (name?.errors?.['required']) {
+                Name is required.
+              }
+              @if (name?.errors?.['minlength']) {
+                Please use at least 4 letters.
+              }
+            }
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput
+                 type="email"
+                 id="email"
+                 formControlName="email"
+                 required>
+          <mat-error>
+            @if (email?.invalid && (formSubmitted || email?.touched)) {
+              @if (email?.errors?.['required']) {
+                Email is required.
+              }
+              @if (email?.errors?.['email']) {
+                Invalid email format.
+              }
+            }
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone</mat-label>
+          <input matInput
+                 type="tel"
+                 id="phone"
+                 formControlName="phone"
+                 required>
+          <mat-error>
+            @if (phone?.invalid && (formSubmitted || phone?.touched)) {
+              @if (phone?.errors?.['required']) {
+                Phone number is required.
+              }
+            }
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group d-flex flex-column gap-4 w-50">
+        <mat-slide-toggle #exchange
+                          (change)="toggleExchangeInputs($event.checked)"
+                          color="primary">I have an exchange
+        </mat-slide-toggle>
+        @if (exchange.checked) {
+          <div class="d-flex gap-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Mileage</mat-label>
+              <input matInput
+                     type="text"
+                     id="mileage"
+                     formControlName="mileage"
+                     required>
+              <mat-error>
+                @if (mileage?.invalid || mileage?.touched) {
+                  @if (mileage?.errors?.['required']) {
+                    Mileage is required.
+                  }
+                  @if (mileage?.errors?.['pattern']) {
+                    Must be in integer format.
+                  }
+                  @if (mileage?.errors?.['negativeMileage']) {
+                    Must be positive number.
+                  }
+                  @if (mileage?.errors?.['oldCar']) {
+                    Vehicle is too old.
+                  }
+                }
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Reg number</mat-label>
+              <input matInput
+                     type="text"
+                     id="regNumber"
+                     formControlName="regNumber"
+                     required>
+              <mat-error>
+                @if (regNumber?.invalid || regNumber?.touched) {
+                  @if (regNumber?.errors?.['required']) {
+                    Reg number is required.
+                  }
+                  @if (regNumber?.errors?.['pattern']) {
+                    Must be in this format AAA23(A|3) uppercase.
+                  }
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+        }
+        <mat-form-field>
+          <mat-label>Message</mat-label>
+          <textarea matInput
+                    formControlName="message"
+                    required>
+          </textarea>
+          <mat-error>
+            @if (message?.invalid && (formSubmitted || message?.touched)) {
+              @if (message?.errors?.['required']) {
+                Message is required.
+              }
+            }
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <mat-checkbox class="example-margin"
+                        color="primary"
+                        formControlName="gdpr"
+                        required>I agree with
+          </mat-checkbox>
+          <a class="link-dark link-opacity-75-hover link-underline-opacity-0"
+             (click)="openGDPR()"
+             style="cursor: pointer;"> GDPR</a>
+          <mat-error style="font-size: 12px;">
+            @if (gdpr?.invalid && (formSubmitted || gdpr?.touched)) {
+              @if (gdpr?.errors?.['required']) {
+                GDPR is required.
+              }
+            }
+          </mat-error>
+        </div>
+        <button mat-raised-button
+                color="primary"
+                class="w-25">Submit
+        </button>
+      </div>
+    </form>
+    @if (formSuccessfullySubmitted) {
+      <ngb-alert class="fs-6 w-50 text-center bg-success text-bg-success">Successfully submitted!</ngb-alert>
+    } @else if (formSuccessfullySubmitted === false) {
+      <ngb-alert class="fs-6 w-50 text-center">Form is invalid</ngb-alert>
+    }
+  </div>
+}
+
