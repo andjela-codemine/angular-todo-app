@@ -40,21 +40,18 @@
             }
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Phone</mat-label>
-          <input matInput
-                 type="tel"
-                 id="phone"
-                 formControlName="phone"
-                 required>
-          <mat-error>
-            @if (phone?.invalid && (formSubmitted || phone?.touched)) {
-              @if (phone?.errors?.['required']) {
-                Phone number is required.
-              }
+        <angular-phone-number-input
+          formControlName="phone"
+          [defaultCountry]="'DE'"
+          [error]="phone?.invalid && (formSubmitted || phone?.touched)"
+        ></angular-phone-number-input>
+        <mat-error style="font-size: 12px; margin-top: -20px">
+          @if (phone?.invalid && (formSubmitted || phone?.touched)) {
+            @if (phone?.errors?.['required']) {
+              Phone number is required.
             }
-          </mat-error>
-        </mat-form-field>
+          }
+        </mat-error>
       </div>
       <div class="form-group d-flex flex-column gap-4 w-50">
         <mat-slide-toggle #exchange
@@ -151,4 +148,3 @@
     }
   </div>
 }
-

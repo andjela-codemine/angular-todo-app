@@ -9,12 +9,13 @@ import { mileageRangeValidator } from '../../directives/mileageValidator.directi
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { GdprDialogComponent } from '../gdpr-dialog/gdpr-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AngularPhoneNumberInput } from 'angular-phone-number-input';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: [ './form.component.css' ],
-  imports: [ MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton, MatSlideToggle, MatCheckbox, NgbAlert ],
+  imports: [ MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButton, MatSlideToggle, MatCheckbox, NgbAlert, AngularPhoneNumberInput ],
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
