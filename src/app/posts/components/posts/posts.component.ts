@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from '../../interfaces/post';
 import { PostService } from '../../services/post.service';
 
@@ -9,12 +9,16 @@ import { PostService } from '../../services/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: Post[] = [];
-  selectedTag = 'all';
-  showPosts = 5;
-  tags: string[] = [ 'all' ];
-  totalNumberOfPosts = 0;
+  selectedTag: string = 'all';
+  totalPosts: number = 5;
 
-  ngOnInit() {
+  showPosts: string = '5';
+  tags: string[] = [ 'all' ];
+  totalNumberOfPosts: number = 0;
+
+  isInfiniteScrollDisabled: boolean = true;
+
+  ngOnInit(): void {
     this.getPosts();
     this.postsService.getAllCategories().subscribe(tags => this.tags.push(...tags));
     this.postsService.getNumberOfPosts()
@@ -23,34 +27,30 @@ export class PostsComponent implements OnInit {
 
   constructor(private postsService: PostService) {}
 
-  selectItem(tag: string) {
+  selectItem(tag: string): void {
     this.selectedTag = tag;
   }
 
-  getPosts() {
-    this.postsService.getProducts(this.showPosts)
+
+  getPosts(): void {
+    this.postsService.getProducts(this.totalPosts)
       .subscribe(posts => {
-        if (Array.isArray(posts)) {
-          this.posts = posts;
-        } else {
-          console.error('Products data is not an array:', posts);
-        }
+        this.posts = posts;
+        this.totalPosts = posts.length;
       });
   }
 
-  changeShowPosts(): void {
-    if (this.showPosts > 0) {
+  scrollDistance: number = 2;
+  scrollUpDistance: number = 1;
+
+  loadMorePosts(): void {
+    if (this.totalNumberOfPosts > this.posts.length) {
+      this.totalPosts = this.totalPosts + parseInt(this.showPosts);
       this.getPosts();
     }
   }
 
-  scrollDistance = 2;
-  scrollUpDistance = 1;
-
-  loadMorePosts(): void {
-    if (this.totalNumberOfPosts > this.posts.length) {
-      this.showPosts += 5;
-      this.getPosts();
-    }
+  toggleInfiniteScroll(infiniteScrollChecked: boolean): void {
+    this.isInfiniteScrollDisabled = !infiniteScrollChecked;
   }
 }

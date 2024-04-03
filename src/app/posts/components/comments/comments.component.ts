@@ -10,21 +10,21 @@ import { Comments } from '../../interfaces/comments';
   imports: [
     NgOptimizedImage
   ],
-  templateUrl: './comments.component.html',
+  templateUrl: './comments.component.html'
 })
 export class CommentsComponent {
-  private modalService = inject(NgbModal);
+  private modalService: NgbModal = inject(NgbModal);
   @Input() postId?: number;
   comments?: Comments[] = [];
 
   constructor(private commentsService: CommentsService) {}
 
-  openScrollableContent(longContent: TemplateRef<any>) {
+  openScrollableContent(longContent: TemplateRef<any>): void {
     this.getComments();
     this.modalService.open(longContent, { scrollable: true, centered: true });
   }
 
-  getComments() {
+  getComments(): void {
     if (this.postId)
       this.commentsService.getComments(this.postId)
         .subscribe(comments => this.comments = comments);

@@ -13,7 +13,7 @@ import { Author } from '../../interfaces/author';
   templateUrl: './author.component.html'
 })
 export class AuthorComponent {
-  private modalService = inject(NgbModal);
+  private modalService: NgbModal = inject(NgbModal);
   @Input() postId?: number;
   author?: Author;
 
@@ -25,7 +25,7 @@ export class AuthorComponent {
       this.authorService.getAuthor(this.postId).subscribe(author => this.author = author);
   }
 
-  openVerticallyCentered(content: TemplateRef<any>) {
+  openVerticallyCentered(content: TemplateRef<any>): void {
     this.getAuthor();
     this.modalService.open(content, { centered: true });
   }

@@ -21,7 +21,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductPipe } from './products/pipes/product.pipe';
 import { ProductComponent } from './products/components/product/product.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormField, MatLabel } from '@angular/material/form-field';
+import { AngularPhoneNumberInput } from 'angular-phone-number-input';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { MatBadge } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,14 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     InfiniteScrollModule,
     NgSelectModule,
     ProductComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularPhoneNumberInput,
+    MatSlideToggle,
+    MatSelect,
+    MatOption,
+    MatLabel,
+    MatFormField,
+    MatBadge
   ],
   providers: [
     provideAnimationsAsync(),

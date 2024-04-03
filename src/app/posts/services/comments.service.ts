@@ -7,7 +7,7 @@ import { Comments } from '../interfaces/comments';
   providedIn: 'root'
 })
 export class CommentsService {
-  private url = 'https://dummyjson.com/comments/post';
+  private url: string = 'https://dummyjson.com/comments/post';
 
   constructor(private http: HttpClient) { }
 
@@ -29,5 +29,4 @@ export class CommentsService {
       catchError(this.handleError<Comments[]>('get comments'))
     );
   }
-
 }

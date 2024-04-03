@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Post } from '../../interfaces/post';
-import { NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 import { AuthorComponent } from '../author/author.component';
 import { CommentsComponent } from '../comments/comments.component';
 
@@ -11,18 +11,19 @@ import { CommentsComponent } from '../comments/comments.component';
   imports: [
     NgOptimizedImage,
     AuthorComponent,
-    CommentsComponent
+    CommentsComponent,
+    NgClass
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
 export class PostComponent {
   @Input() post: Post | undefined;
-  selectedTag = '';
-  @Output() selectedTagChange = new EventEmitter<string>();
+  @Input() selectedTag: string = '';
+  @Output() selectedTagChange: EventEmitter<string> = new EventEmitter<string>();
   likeClicks: number = 0;
 
-  updateSelectedTag(tag: string) {
+  updateSelectedTag(tag: string): void {
     this.selectedTag = tag;
     this.selectedTagChange.emit(this.selectedTag);
   }
