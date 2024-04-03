@@ -9,17 +9,17 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  currentPage = 1;
-  totalItems = 0;
-  itemsPerPage = 9;
-  inputSearch = '';
+  currentPage: number = 1;
+  totalItems: number = 0;
+  itemsPerPage: number = 9;
+  inputSearch: string = '';
 
   selectedCategory: string | undefined;
   categories: string[] = [];
-  selectedBrand = '';
+  selectedBrand: string = '';
   brands: string[] = [];
 
-  categoriesChanged() {
+  categoriesChanged(): void {
     this.getProducts();
   }
 

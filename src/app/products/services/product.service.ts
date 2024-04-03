@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, tap, map } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  productsUrl = 'https://dummyjson.com/products';
+  productsUrl: string = 'https://dummyjson.com/products';
 
   constructor(private http: HttpClient) { }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation: string = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       this.log(`${ operation } failed: ${ error.message }`);
@@ -19,16 +19,16 @@ export class ProductService {
     };
   }
 
-  private log(message: string) {
+  private log(message: string): void {
     console.log(`ProductService: ${ message }`);
   }
 
   getProducts(limit: number, page: number, category?: string): Observable<Product[]> {
-    let categoryParam = '';
+    let categoryParam: string = '';
     if (category) {
       categoryParam = `/category/${ category }`;
     }
-    const url = `${ this.productsUrl }${ categoryParam }?limit=${ limit }&skip=${ (page - 1) * limit }`;
+    const url: string = `${ this.productsUrl }${ categoryParam }?limit=${ limit }&skip=${ (page - 1) * limit }`;
     return this.http.get<any>(url).pipe(
       map(response => response.products),
       tap(_ => this.log('fetched products')),
@@ -54,7 +54,7 @@ export class ProductService {
   }
 
   searchTerm(term: string): Observable<any> {
-    const searchTermUrl = `${ this.productsUrl }/search?q=${ term }`;
+    const searchTermUrl: string = `${ this.productsUrl }/search?q=${ term }`;
 
     return this.http.get<any>(searchTermUrl).pipe(
       map(response => response.products),

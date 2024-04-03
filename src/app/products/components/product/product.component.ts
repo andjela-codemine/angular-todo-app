@@ -1,6 +1,6 @@
-import { Component, Input, TemplateRef, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
-import { NgbModal, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -14,10 +14,9 @@ import { NgOptimizedImage } from '@angular/common';
 export class ProductComponent {
   @Input() product?: Product;
 
-  private modalService = inject(NgbModal);
+  private modalService: NgbModal = inject(NgbModal);
 
-  openVerticallyCentered(content: TemplateRef<any>) {
+  openVerticallyCentered(content: TemplateRef<any>): void {
     this.modalService.open(content, { centered: true });
   }
-
 }

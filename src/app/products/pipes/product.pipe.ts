@@ -6,7 +6,10 @@ import { Product } from '../interfaces/product.interface';
 })
 
 export class ProductPipe implements PipeTransform {
-  transform(products: Product[], selectedBrand: string): Product[] {
-    return products.filter(product => product.brand.includes(selectedBrand));
-  } // kako da filterujem vise opcija
+  transform(products: Product[], selectedBrands: string[] | string): Product[] {
+    if (!products || !selectedBrands || selectedBrands.length === 0) {
+      return products;
+    }
+    return products.filter(product => selectedBrands.includes(product.brand));
+  }
 }
