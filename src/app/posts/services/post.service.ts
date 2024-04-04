@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../interfaces/post';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
@@ -23,35 +23,12 @@ export class PostService {
     console.log(`PostService: ${ message }`);
   }
 
-  getProducts(limit: number): Observable<Post[]> {
-    const url: string = `${ this.postsUrl }?limit=${ limit }`;
-    return this.http.get<any>(url).pipe(
+  getPosts(limit: number): Observable<Post[]> {
+    let params: HttpParams = new HttpParams().set('limit', limit.toString());
+    return this.http.get<any>(this.postsUrl, { params }).pipe(
       map(response => response.posts),
       tap(_ => this.log('fetched posts')),
       catchError(this.handleError<Post[]>('get posts'))
-    );
-  }
-
-  getAllCategories(): Observable<string[]> {
-    return this.http.get<any>(this.postsUrl).pipe(
-      map(response => response.posts),
-      map(posts => {
-        return posts.reduce((acc: string[], post: any) => {
-          post.tags.forEach((tag: string): void => {
-            if (!acc.includes(tag)) {
-              acc.push(tag);
-            }
-          });
-          return acc;
-        }, []);
-      }),
-      catchError(this.handleError<string[]>('getUniqueTags'))
-    );
-  }
-
-  getNumberOfPosts(): Observable<number> {
-    return this.http.get<any>(this.postsUrl).pipe(
-      map(response => response.total)
     );
   }
 }

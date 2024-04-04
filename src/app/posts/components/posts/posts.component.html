@@ -13,44 +13,30 @@
     <mat-form-field>
       <mat-label>Posts per API call</mat-label>
       <mat-select disableRipple
-                  [(ngModel)]="showPosts">
+                  [(ngModel)]="postsPerAPI">
         <mat-option value="5">5</mat-option>
         <mat-option value="10">10</mat-option>
         <mat-option value="15">15</mat-option>
       </mat-select>
     </mat-form-field>
-    <div ngbDropdown
-         class="dropdown">
-      <label for="dropdownMenu2"
-             class="fw-bold text-white">Filter posts by category</label>
-      <button class="btn text-white dropdown-toggle"
-              id="dropdownMenu2"
-              ngbDropdownToggle
-              aria-expanded="false">
-        {{ selectedTag }}
-      </button>
-      <ul class="dropdown-menu"
-          aria-labelledby="dropdownMenu2"
-          ngbDropdownMenu>
-        @for (tag of tags; track tag) {
-          <li>
-            <button class="dropdown-item btn btn-outline-dark"
-                    type="button"
-                    (click)="selectItem(tag)"
-                    value="">{{ tag }}
-            </button>
-          </li>
-        }
-      </ul>
-    </div>
-    <div matBadge="{{ totalPosts }}"
+    @if (selectedTag) {
+      <div style="color: white"
+           class="d-flex justify-content-center align-items-center p-3 gap-2">
+        Active tag
+        <mat-chip-option color="primary"
+                         selected
+                         (click)="selectedTag=''">{{ selectedTag }}
+        </mat-chip-option>
+      </div>
+    }
+    <div matBadge="{{ (posts | filterPosts: selectedTag).length }}"
          matBadgeOverlap="false"
          class="demo-section"
          style="color: white;">Total posts
     </div>
   </div>
   <div class="d-flex gap-3 flex-wrap justify-content-center">
-    @for (post of posts | filterPosts: selectedTag; track post; ) {
+    @for (post of posts | filterPosts: selectedTag; track post) {
       <app-post [post]="post"
                 (selectedTagChange)="selectItem($event)"
                 [selectedTag]="selectedTag">
@@ -59,7 +45,6 @@
   </div>
   @if (isInfiniteScrollDisabled) {
     <button class="load-more-posts btn mt-4"
-            [disabled]="totalNumberOfPosts <= posts.length"
             (click)="loadMorePosts()">Load more posts
     </button>
   }

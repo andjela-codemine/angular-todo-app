@@ -9,20 +9,13 @@ import { PostService } from '../../services/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: Post[] = [];
-  selectedTag: string = 'all';
-  totalPosts: number = 5;
+  selectedTag: string = '';
 
-  showPosts: string = '5';
-  tags: string[] = [ 'all' ];
-  totalNumberOfPosts: number = 0;
-
+  postsPerAPI: string = '5';
   isInfiniteScrollDisabled: boolean = true;
 
   ngOnInit(): void {
     this.getPosts();
-    this.postsService.getAllCategories().subscribe(tags => this.tags.push(...tags));
-    this.postsService.getNumberOfPosts()
-      .subscribe(total => this.totalNumberOfPosts = total);
   }
 
   constructor(private postsService: PostService) {}
@@ -31,12 +24,10 @@ export class PostsComponent implements OnInit {
     this.selectedTag = tag;
   }
 
-
   getPosts(): void {
-    this.postsService.getProducts(this.totalPosts)
-      .subscribe(posts => {
+    this.postsService.getPosts(this.posts.length + parseInt(this.postsPerAPI))
+      .subscribe((posts: Post[]): void => {
         this.posts = posts;
-        this.totalPosts = posts.length;
       });
   }
 
@@ -44,10 +35,7 @@ export class PostsComponent implements OnInit {
   scrollUpDistance: number = 1;
 
   loadMorePosts(): void {
-    if (this.totalNumberOfPosts > this.posts.length) {
-      this.totalPosts = this.totalPosts + parseInt(this.showPosts);
-      this.getPosts();
-    }
+    this.getPosts();
   }
 
   toggleInfiniteScroll(infiniteScrollChecked: boolean): void {

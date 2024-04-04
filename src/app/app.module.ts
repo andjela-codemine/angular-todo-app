@@ -26,6 +26,7 @@ import { AngularPhoneNumberInput } from 'angular-phone-number-input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatBadge } from '@angular/material/badge';
+import { MatChipOption } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { MatBadge } from '@angular/material/badge';
     MatOption,
     MatLabel,
     MatFormField,
-    MatBadge
+    MatBadge,
+    MatChipOption
   ],
   providers: [
     provideAnimationsAsync(),

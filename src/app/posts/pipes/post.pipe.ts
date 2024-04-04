@@ -6,10 +6,10 @@ import { Post } from '../interfaces/post';
 })
 
 export class PostPipe implements PipeTransform {
-  transform(posts: Post[], operation: string): Post[] {
-    if (operation === 'all') {
+  transform(posts: Post[], tag: string): Post[] {
+    if (tag === '') {
       return posts;
     }
-    return posts.filter(post => post.tags.includes(operation));
+    return posts.filter((post: Post) => post.tags.includes(tag));
   }
 }
